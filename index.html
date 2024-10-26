@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Number Guessing Game</h1>
+
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+
+        {% if session.get('number_to_guess') %}
+            <!-- Game in progress -->
+            <form method="POST">
+                <label for="guess">Take a guess:</label>
+                <input type="number" id="guess" name="guess" required>
+                <button type="submit" name="guess_button">Guess</button>
+            </form>
+            <p>Attempts: {{ attempts }}</p>
+        {% else %}
+            <!-- New Game Form -->
+            <form method="POST">
+                <label for="lower_bound">Enter lower bound:</label>
+                <input type="number" id="lower_bound" name="lower_bound" required>
+                
+                <label for="upper_bound">Enter upper bound:</label>
+                <input type="number" id="upper_bound" name="upper_bound" required>
+                
+                <button type="submit" name="start_game">Start Game</button>
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>
